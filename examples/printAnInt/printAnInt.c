@@ -12,6 +12,7 @@ int main(){
 
 	//displays output
 	printf("You entered: %d", number);
+	printf("\n");
 
 	return 0;
 }
