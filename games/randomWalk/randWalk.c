@@ -15,54 +15,68 @@
 
 int main(void){
 
-	int i, j, k, direction, new_i, new_j, moves;
+	int i, j, k, direction;
 
-	char board[ROWS][COLS], character = 'A';	
-	const char pathOptions[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','Y','Z'};
+	char grid[ROWS][COLS];
+
+	const char pathOptions[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
 	srand((unsigned) time(NULL));
 
 	for(i = 0; i < ROWS; i++){
 		for(j = 0; j < COLS; j++){
-			board[i][j] = '.';
+			grid[i][j] = '.';
 		}
 	}
 
 	i = 0;
 	j = 0;
 	k = 0;
-	moves = 0;
+
 	//sets the start
-	board[i][j] = pathOptions[0];
+	grid[i][j] = (char) 'A' + k;
+	k++;	
+	while(k < 26){
+		
+		direction = rand() %  4;
 
-	while(moves < 4 && character <= 'z'){
+		switch(direction){
+			//Move Right
+			case 0: if(j < ROWS - 1 && grid[i][j + 1] == '.'){
+				       	grid[i][j + 1] = (char) 'A' + k;
+					k++; j++;
+				}	
+				break;
 
-		switch((direction + i) % 4){
-			case 0: new_i = i; new_j = j + 1; break;
-			case 1: new_i = i; new_j = j - 1; break;
-			case 2: new_i = i + 1; new_j = j; break;
-			case 3: new_i = i - 1; new_j = j; break;
-		}
-		if(new_i >= 0 && new_i < COLS && new_j >= 0 && new_j < ROWS && board[new_i][new_j] == '.'){
-			i = new_i;
-			j = new_j;
-			board[i][j] = pathOptions++;
-			direction = rand() % 4;
-			moves = 0;
-		}
-		else{
-			moves++;
+			//Move down
+			case 1: if(grid[i + 1][j] == '.'){
+					grid[i + 1][j] = (char) 'A' + k;
+					k++; i++;
+				}
+
+				break;
+			//Move up
+			case 2: if(grid[i-1][j] == '.'){
+					grid[i-1][j] = (char) 'A' + k;
+					k++; i--;
+				}
+				break;
+			//Move left
+			case 3: if(grid[i][j-1] == '.'){
+					grid[i][j-1] = (char) 'A' + k;
+					k++; j--;
+				}
+				break;
 		}
 	}
 
-	for(i = 0; i < COLS; i++){
-		for(j = 0; j < ROWS; j++){
-			printf("%c", board[i][j]);
-			printf("\n");
+	for(i = 0; i < ROWS; i++){
+		for(j = 0; j < COLS; j++){
+			printf("%4c", grid[i][j]);
 		}
+		printf("\n");
 	}
 	return 0;
-
 }
 
 
