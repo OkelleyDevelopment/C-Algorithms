@@ -5,7 +5,7 @@
  * After the user enters the words, the program will determine which words
  * would come first and last if the words were listed in dictionary order. The program
  * must stop accepting input when the user entes a four-letter word. Assume that no word
- * is more than 20 lettes long.
+ * is more than 20 letters long.
  */
 
 #include <stdio.h>
