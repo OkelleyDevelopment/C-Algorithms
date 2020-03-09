@@ -8,15 +8,12 @@
 
 #include <stdio.h>
  
-// function to sort the subsection a[i .. j] of the array a[]
 void merge_sort(int i, int j, int a[], int aux[]) {
     if (j <= i) {
         return;     // the subsection is empty or a single element
     }
     int mid = (i + j) / 2;
 
-    // left sub-array is a[i .. mid]
-    // right sub-array is a[mid + 1 .. j]
     
     merge_sort(i, mid, a, aux);     // sort the left sub-array recursively
     merge_sort(mid + 1, j, a, aux);     // sort the right sub-array recursively
